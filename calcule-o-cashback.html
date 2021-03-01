@@ -20,6 +20,14 @@ function copiar() {
 }
 function calcular(){
    valor_boleto=parseFloat(document.getElementById("valor").value);
+   if (valor_boleto > 5000) {
+      document.getElementById("valor").className="coral";
+      document.getElementById("valorHelp").innerText="Tem certeza? AVISO: Regulamento item 2.5.3 limita o boleto no maximo R$ 5mil.";
+   }
+   else {
+      document.getElementById("valor").className="amarelo";
+      document.getElementById("valorHelp").innerText="Informe o valor do boleto que você deseja pagar.";
+   }
    perc_cashback=parseFloat(document.getElementById("perc_cashback").value/100);
    cashback_maximo=parseFloat(document.getElementById("cashback_maximo").value);
    taxa_picpay=3.49/100;
@@ -87,6 +95,7 @@ function mascara(o,f){
 }
 function execmascara(){
     v_obj.value=v_fun(v_obj.value);
+    calcular();
 }
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -120,7 +129,7 @@ td {text-align: center; font-size: 14px; }
          <td id="calculos" valign="top">
             <div class="row row-cols-lg-auto g-3 align-items-center">
                <label for="valor" class="form-label">Preencha o valor do boleto, R$:</label>
-               <input class="amarelo" type="text" id="valor" name="valor" placeholder="Informe o valor do seu boleto" size="15" maxlength="13" value="3050.00" onclick="this.select();" onkeypress="mascara(this,reais)">
+               <input class="amarelo" type="text" id="valor" name="valor" placeholder="Informe o valor do seu boleto" size="15" maxlength="13" value="2190.00" onclick="this.select();" onkeypress="mascara(this,reais)">
                <div id="valorHelp" class="form-text">Informe o valor do boleto que você deseja pagar.</div>
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
@@ -135,7 +144,7 @@ td {text-align: center; font-size: 14px; }
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
                <label for="perc_cashback" class="form-label">Informe o percentual de cashback da promoção:</label>
-               <input class="amarelo" type="number" id="perc_cashback" name="cashback" size="3" value="18" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();">
+               <input class="amarelo" type="number" id="perc_cashback" name="cashback" size="3" value="25" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();">
                <div id="perc_cashbackHelp" class="form-text">O percentual do cashback varia conforme a quantidade de parcelas e a promoção recebida.</div>
             </div>
             <p><button type="button" class="btn btn-primary" onclick="calcular()">Calcular quanto vou receber de cashback pagando um boleto <i class="fas fa-money-bill-wave"></i></button></p>

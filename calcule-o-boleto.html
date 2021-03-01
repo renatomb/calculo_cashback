@@ -20,6 +20,7 @@ function copiar() {
 }
 function calcular(){
    valor_cashback=parseFloat(document.getElementById("valor").value);
+   document.getElementById("mostrar_alerta").style.visibility="hidden";
    for (var i = 2; i < 13; i++) {
       var taxa_picpay=3.49/100;
       var taxa_pagto_boleto=2.99/100;
@@ -27,11 +28,18 @@ function calcular(){
       var valor_parcela=(valor_cartao/i);
       var valor_financiado=(((1-Math.pow((1+taxa_picpay),-i))/taxa_picpay)*valor_parcela);
       var valor_boleto=(valor_financiado*(1-taxa_pagto_boleto));
+      if (valor_boleto > 5000) {
+         valor_boleto=5000;
+         m_valor_boleto=valor_boleto.toFixed(2)+"*";
+         document.getElementById("mostrar_alerta").style.visibility="visible";
+      }
+      else {
+         m_valor_boleto=valor_boleto.toFixed(2);
+      }
       var resultado_parcela=valor_boleto+valor_cashback-valor_cartao;
       valor_cartao=valor_cartao.toFixed(2);
       valor_parcela=valor_parcela.toFixed(2);
       valor_financiado=valor_financiado.toFixed(2);
-      valor_boleto=valor_boleto.toFixed(2);
       if (resultado_parcela > 0) {
          document.getElementById("info_"+i).innerHTML="Você <b>ganha</b> R$ "+resultado_parcela.toFixed(2);
          document.getElementById("linha_"+i).className="verde";
@@ -42,7 +50,7 @@ function calcular(){
       }
       document.getElementById("cartao_"+i).innerText=valor_cartao;
       document.getElementById("parcela_"+i).innerText=valor_parcela;
-      document.getElementById("boleto_"+i).innerText=valor_boleto;
+      document.getElementById("boleto_"+i).innerText=m_valor_boleto;
 /*
       document.getElementById("detalhe_"+i).innerText="Será cobrado no seu cartão.....R$ "+valor_cartao+"\n"+
                                                       "Valor financiado...............R$ "+(valor_financiado)+"\n"+
@@ -60,10 +68,10 @@ function mascara(o,f){
     v_obj=o;
     v_fun=f;
     setTimeout("execmascara()",1);
-    calcular();
 }
 function execmascara(){
     v_obj.value=v_fun(v_obj.value);
+    calcular();
 }
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -117,7 +125,7 @@ td {text-align: center; font-size: 14px; }
          </td>
          <td width="270" valign="top"><h3>Gostou? Manda um café no pix!</h3><img src="pix.png" width="261" height="332"><h4>Acesse o grupo no telegram:</h4><a href="https://t.me/PicPay"><i class="fab fa-telegram fa-4x"></i></a></td>
       </tr>
-      <tr><td>Veja também:<p><a href="calcule-o-cashback.html"><button type="button" class="btn btn-info">Calcular quanto vou receber de cashback pagando um boleto <i class="fas fa-money-bill-wave"></i></button></a></p></td></tr>
+      <tr><td><p id="mostrar_alerta" style="visibility: hidden;">* <b>Valor do boleto limitado a R$ 5.000,00</b> conforme item 2.5.3 do <a href="https://meajuda.picpay.com/hc/pt-br/articles/360056463652-Regras-de-cashback-para-parcelamentos-de-boletos">regulamento da promoção</a>.</p>Veja também:<p><a href="calcule-o-cashback.html"><button type="button" class="btn btn-info">Calcular quanto vou receber de cashback pagando um boleto <i class="fas fa-money-bill-wave"></i></button></a></p></td></tr>
    </table>
 </div></div>
 <div class="card"></div>
