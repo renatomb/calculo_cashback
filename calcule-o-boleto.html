@@ -19,9 +19,9 @@ function copiar() {
   document.getElementById("clip_btn").innerHTML='<i class="fas fa-clipboard-check"></i>';
 }
 function calcular(){
-   valor_cashback=parseFloat(document.getElementById("valor").value);
    document.getElementById("mostrar_alerta").style.visibility="hidden";
    for (var i = 2; i < 13; i++) {
+      valor_cashback=parseFloat(document.getElementById("valor").value);
       var taxa_picpay=3.49/100;
       var taxa_pagto_boleto=2.99/100;
       var valor_cartao=(valor_cashback/(document.getElementById("percentual_"+i).value/100));
@@ -30,6 +30,10 @@ function calcular(){
       var valor_boleto=(valor_financiado*(1-taxa_pagto_boleto));
       if (valor_boleto > 5000) {
          valor_boleto=5000;
+         valor_financiado=valor_boleto*(1+taxa_pagto_boleto);
+         valor_parcela=(taxa_picpay/(1-Math.pow((1+taxa_picpay),-i)))*valor_financiado;
+         valor_cartao=valor_parcela*i;
+         valor_cashback=parseFloat(document.getElementById("percentual_"+i).value/100)*valor_cartao;
          m_valor_boleto=valor_boleto.toFixed(2)+"*";
          document.getElementById("mostrar_alerta").style.visibility="visible";
       }
