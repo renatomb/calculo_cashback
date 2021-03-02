@@ -129,7 +129,7 @@ td {text-align: center; font-size: 14px; }
          <td id="calculos" valign="top">
             <div class="row row-cols-lg-auto g-3 align-items-center">
                <label for="valor" class="form-label">Preencha o valor do boleto, R$:</label>
-               <input class="amarelo" type="text" id="valor" name="valor" placeholder="Informe o valor do seu boleto" size="15" maxlength="13" value="2190.00" onclick="this.select();" onkeypress="mascara(this,reais)">
+               <input class="amarelo" type="text" id="valor" name="valor" placeholder="Informe o valor do seu boleto" size="15" maxlength="13" value="5000.00" onclick="this.select();" onkeypress="mascara(this,reais)">
                <div id="valorHelp" class="form-text">Informe o valor do boleto que você deseja pagar.</div>
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
@@ -139,12 +139,12 @@ td {text-align: center; font-size: 14px; }
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
                <label for="qtd_parcelas" class="form-label">Informe a quantidade de parcelas:</label>
-               <input class="amarelo" type="number" id="qtd_parcelas" name="parcelas" size="3" value="12" min="2" max="12" step="1" class="amarelo" onclick="this.select();" onchange="calcular();">
+               <input class="amarelo" type="number" id="qtd_parcelas" name="parcelas" size="3" value="2" min="2" max="12" step="1" class="amarelo" onclick="this.select();" onchange="calcular();">
                <div id="qtd_parcelasHelp" class="form-text">Informe em quantas vezes deseja parcelar o pagamento.</div>
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
                <label for="perc_cashback" class="form-label">Informe o percentual de cashback da promoção:</label>
-               <input class="amarelo" type="number" id="perc_cashback" name="cashback" size="3" value="25" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();">
+               <input class="amarelo" type="number" id="perc_cashback" name="cashback" size="3" value="10" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();">
                <div id="perc_cashbackHelp" class="form-text">O percentual do cashback varia conforme a quantidade de parcelas e a promoção recebida.</div>
             </div>
             <p><button type="button" class="btn btn-primary" onclick="calcular()">Calcular quanto vou receber de cashback pagando um boleto <i class="fas fa-money-bill-wave"></i></button></p>
