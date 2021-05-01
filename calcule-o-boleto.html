@@ -22,7 +22,7 @@ function calcular(){
    document.getElementById("mostrar_alerta").style.visibility="hidden";
    for (var i = 2; i < 13; i++) {
       valor_cashback=parseFloat(document.getElementById("valor").value);
-      var taxa_picpay=3.49/100;
+      var taxa_picpay=3.69/100;
       var taxa_pagto_boleto=2.99/100;
       var valor_cartao=(valor_cashback/(document.getElementById("percentual_"+i).value/100));
       var valor_parcela=(valor_cartao/i);
