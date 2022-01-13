@@ -12,11 +12,12 @@
 <script src="https://kit.fontawesome.com/0f8eed42e7.js" crossorigin="anonymous"></script>
 <script>
 function copiar() {
-  var copyText = document.getElementById("brcodepix");
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
-  document.execCommand("copy");
-  document.getElementById("clip_btn").innerHTML='<i class="fas fa-clipboard-check"></i>';
+   var input_temp = document.createElement("input");
+   input_temp.value = "00020126790014BR.GOV.BCB.PIX013642a57095-84f3-4a42-b9fb-d08935c86f470217Planilha cashback5204000053039865802BR5923Renato Monteiro Batista6009SAO PAULO61080540900062070503***6304E57A";
+   document.body.appendChild(input_temp);
+   input_temp.select();
+   document.execCommand("copy");
+   document.body.removeChild(input_temp);
 }
 function calcular(){
    document.getElementById("mostrar_alerta").style.visibility="hidden";
@@ -24,16 +25,16 @@ function calcular(){
       valor_cashback=parseFloat(document.getElementById("valor").value);
       var taxa_picpay=3.69/100;
       var taxa_pagto_boleto=3.09/100;
-      var valor_cartao=(valor_cashback/(document.getElementById("percentual_"+i).value/100));
-      var valor_parcela=(valor_cartao/i);
-      var valor_financiado=(((1-Math.pow((1+taxa_picpay),-i))/taxa_picpay)*valor_parcela);
-      var valor_boleto=(valor_financiado*(1-taxa_pagto_boleto));
+      var valor_boleto=(valor_cashback/(document.getElementById("percentual_"+i).value/100));
+      var valor_financiado=valor_boleto*(1+taxa_pagto_boleto);
+      var valor_parcela=(taxa_picpay/(1-Math.pow((1+taxa_picpay),-i)))*valor_financiado;
+      var valor_cartao=valor_parcela*i;
       if (valor_boleto > 5000) {
          valor_boleto=5000;
          valor_financiado=valor_boleto*(1+taxa_pagto_boleto);
          valor_parcela=(taxa_picpay/(1-Math.pow((1+taxa_picpay),-i)))*valor_financiado;
          valor_cartao=valor_parcela*i;
-         valor_cashback=parseFloat(document.getElementById("percentual_"+i).value/100)*valor_cartao;
+         valor_cashback=parseFloat(document.getElementById("percentual_"+i).value/100)*valor_boleto;
          m_valor_boleto=valor_boleto.toFixed(2)+"*";
          document.getElementById("mostrar_alerta").style.visibility="visible";
       }
@@ -114,20 +115,20 @@ td {text-align: center; font-size: 14px; }
          <td>
             <table class="table">
                <thead><th>% Cashback</th><th>Qtd Parcelas</th><th>Pague um boleto de R$</th><th>Será cobrado no seu cartão</th><th>Valor da parcela</th><th>Vale a pena?</th></thead>
-               <tr id="linha_2"><td><input type="number" id="percentual_2" value="0" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>2</td><td id="boleto_2">&nbsp;</td><td id="cartao_2">&nbsp;</td><td id="parcela_2">&nbsp;</td><td id="info_2">&nbsp;</td></tr>
-               <tr id="linha_3"><td><input type="number" id="percentual_3" value="4" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>3</td><td id="boleto_3">&nbsp;</td><td id="cartao_3">&nbsp;</td><td id="parcela_3">&nbsp;</td><td id="info_3">&nbsp;</td></tr>
-               <tr id="linha_4"><td><input type="number" id="percentual_4" value="4" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>4</td><td id="boleto_4">&nbsp;</td><td id="cartao_4">&nbsp;</td><td id="parcela_4">&nbsp;</td><td id="info_4">&nbsp;</td></tr>
-               <tr id="linha_5"><td><input type="number" id="percentual_5" value="4" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>5</td><td id="boleto_5">&nbsp;</td><td id="cartao_5">&nbsp;</td><td id="parcela_5">&nbsp;</td><td id="info_5">&nbsp;</td></tr>
-               <tr id="linha_6"><td><input type="number" id="percentual_6" value="9" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>6</td><td id="boleto_6">&nbsp;</td><td id="cartao_6">&nbsp;</td><td id="parcela_6">&nbsp;</td><td id="info_6">&nbsp;</td></tr>
-               <tr id="linha_7"><td><input type="number" id="percentual_7" value="9" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>7</td><td id="boleto_7">&nbsp;</td><td id="cartao_7">&nbsp;</td><td id="parcela_7">&nbsp;</td><td id="info_7">&nbsp;</td></tr>
-               <tr id="linha_8"><td><input type="number" id="percentual_8" value="9" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>8</td><td id="boleto_8">&nbsp;</td><td id="cartao_8">&nbsp;</td><td id="parcela_8">&nbsp;</td><td id="info_8">&nbsp;</td></tr>
-               <tr id="linha_9"><td><input type="number" id="percentual_9" value="9" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>9</td><td id="boleto_9">&nbsp;</td><td id="cartao_9">&nbsp;</td><td id="parcela_9">&nbsp;</td><td id="info_9">&nbsp;</td></tr>
-               <tr id="linha_10"><td><input type="number" id="percentual_10" value="15" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>10</td><td id="boleto_10">&nbsp;</td><td id="cartao_10">&nbsp;</td><td id="parcela_10">&nbsp;</td><td id="info_10">&nbsp;</td></tr>
-               <tr id="linha_11"><td><input type="number" id="percentual_11" value="15" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>11</td><td id="boleto_11">&nbsp;</td><td id="cartao_11">&nbsp;</td><td id="parcela_11">&nbsp;</td><td id="info_11">&nbsp;</td></tr>
-               <tr id="linha_12"><td><input type="number" id="percentual_12" value="18" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>12</td><td id="boleto_12">&nbsp;</td><td id="cartao_12">&nbsp;</td><td id="parcela_12">&nbsp;</td><td id="info_12">&nbsp;</td></tr>
+               <tr id="linha_2"><td><input type="number" id="percentual_2" value="5" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>2</td><td id="boleto_2">&nbsp;</td><td id="cartao_2">&nbsp;</td><td id="parcela_2">&nbsp;</td><td id="info_2">&nbsp;</td></tr>
+               <tr id="linha_3"><td><input type="number" id="percentual_3" value="5" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>3</td><td id="boleto_3">&nbsp;</td><td id="cartao_3">&nbsp;</td><td id="parcela_3">&nbsp;</td><td id="info_3">&nbsp;</td></tr>
+               <tr id="linha_4"><td><input type="number" id="percentual_4" value="5" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>4</td><td id="boleto_4">&nbsp;</td><td id="cartao_4">&nbsp;</td><td id="parcela_4">&nbsp;</td><td id="info_4">&nbsp;</td></tr>
+               <tr id="linha_5"><td><input type="number" id="percentual_5" value="5" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>5</td><td id="boleto_5">&nbsp;</td><td id="cartao_5">&nbsp;</td><td id="parcela_5">&nbsp;</td><td id="info_5">&nbsp;</td></tr>
+               <tr id="linha_6"><td><input type="number" id="percentual_6" value="10" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>6</td><td id="boleto_6">&nbsp;</td><td id="cartao_6">&nbsp;</td><td id="parcela_6">&nbsp;</td><td id="info_6">&nbsp;</td></tr>
+               <tr id="linha_7"><td><input type="number" id="percentual_7" value="10" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>7</td><td id="boleto_7">&nbsp;</td><td id="cartao_7">&nbsp;</td><td id="parcela_7">&nbsp;</td><td id="info_7">&nbsp;</td></tr>
+               <tr id="linha_8"><td><input type="number" id="percentual_8" value="10" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>8</td><td id="boleto_8">&nbsp;</td><td id="cartao_8">&nbsp;</td><td id="parcela_8">&nbsp;</td><td id="info_8">&nbsp;</td></tr>
+               <tr id="linha_9"><td><input type="number" id="percentual_9" value="10" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>9</td><td id="boleto_9">&nbsp;</td><td id="cartao_9">&nbsp;</td><td id="parcela_9">&nbsp;</td><td id="info_9">&nbsp;</td></tr>
+               <tr id="linha_10"><td><input type="number" id="percentual_10" value="17" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>10</td><td id="boleto_10">&nbsp;</td><td id="cartao_10">&nbsp;</td><td id="parcela_10">&nbsp;</td><td id="info_10">&nbsp;</td></tr>
+               <tr id="linha_11"><td><input type="number" id="percentual_11" value="17" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>11</td><td id="boleto_11">&nbsp;</td><td id="cartao_11">&nbsp;</td><td id="parcela_11">&nbsp;</td><td id="info_11">&nbsp;</td></tr>
+               <tr id="linha_12"><td><input type="number" id="percentual_12" value="20" min="0" max="99" step="1" class="amarelo" onclick="this.select();" onchange="calcular();"> %</td><td>12</td><td id="boleto_12">&nbsp;</td><td id="cartao_12">&nbsp;</td><td id="parcela_12">&nbsp;</td><td id="info_12">&nbsp;</td></tr>
             </table>
          </td>
-         <td width="270" valign="top"><h3><font color="blue">Ajude a manter este projeto, mande pix:</font></h3><img src="logo_pix.png"><br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAR0AAAEdAQMAAAALpCE4AAAABlBMVEX///8AAABVwtN+AAADV0lEQVRoge1aQY7jMAxT0IOPeYJ/0nwsQAL0Y+1P/IQccwiiJam0zXQ+oB3UB08mZgdwJdEUPWbf8R1/fvTuvtulrVf+du1vvg5+a6vhCWPOC8KPq118NUzlsYwVTxPXby1Ws4KwHYCa3zX13orWO0y+5wd52ftb4+4M08WtWy7/A8jMHUtIJWcqzRVvsoNmpT+CgY1FSXRIf4XqZ9JlA7GCAVqvv6aPMk8GOkY1RiRq+WpMqp/r+UDIHdTAVlnBkU/cVFsHkFBukHu5gyTJ7g1PI/epQhjrOXYJQc0G0AyqYcNSv6EGsGOwJ/Lp3ucFIXdWTtiY1cLYYGwVjA/44HlBCIaRM4uLcFi8HUgI6xs5KS+IJMncUQLhyaokgUD+WCwvaEQFU8E8GIdumZrySaBT7PKB+jhPTVoGhDO56kIKAUeu5QVtht0p/Qk/xOSxxdfxmhCk4iXZMyzUX05p0/BB4wFgaUEg+5VxiD29wsJU4gfntCAMMWUomAcKQamEkjjoKC0IAl0N3cCkxxPDMtbzH8kJ6kU4Y6SSlBgmgB6A27DkBbGpILsXaoDoNighodz9pAsygqgLerUXFr01ZS9lpXg0MWiKGlBj+uw7ZpOizA0iu4vYbYpug+xZjU3eqzHNCOK374oDQdFtLGIiPzWBGUHbsTFkftN59ZQEkVl5QWroEBYp3mcWVZZxlSmQFcR8won0euvkzMmLQnU3ywuaont2mlxSYn6wJ3TBnhlEmwi7k6Moxpc4WJlo5V3m+UBUjyxU7i4M6fUaPCqPNC/IJAnoV0A9cpKRgQPKTuZLTlB8++rlUAgbhSNNpP6HLsgHkuXCkt3Zd+xs8oh0OknvbiMjKAzQqiZUNgyE4xS0L3MjK4hJL6Y0ZREPLTV5isjLL8gIQjCY/kdrh7cqBHXZuUGTa3p6GDqqNsWGly6WFiRnlHuKpHI6vNLw0WrnBQWSKh0HbTnuW3gPEMg5LShucY3CkZaLCpoKoQuXMTFopnN7WHRKf9qjJt/l7dBkBB13ish80iW7jV1XGcynE7HmBIWq4TrJnr6Gjtfy9KLTgrREEjpuEl13o/XjqjcZaJZzERdyuusq4f6Hk2R5QazgkDHu+u8KLkmJtY/r51yg7/iOPz3+AQrz/9m9jShQAAAAAElFTkSuQmCC"><br><font color="blue">42a57095-84f3-4a42-b9fb-d08935c86f47</font><h4>Acesse o grupo no telegram:</h4><a href="https://t.me/PicPay"><i class="fab fa-telegram fa-4x"></i></a></td>
+         <td width="270" valign="top"><a href="javascript:copiar();"><img src="pix.png" width="261" height="372"></a><h4>Acesse o grupo no telegram:</h4><a href="https://t.me/PicPay"><i class="fab fa-telegram fa-4x"></i></a></td>
       </tr>
       <tr><td><p id="mostrar_alerta" style="visibility: hidden;">* <b>Valor do boleto limitado a R$ 5.000,00</b> conforme item 2.5.3 do <a href="https://meajuda.picpay.com/hc/pt-br/articles/360056463652-Regras-de-cashback-para-parcelamentos-de-boletos">regulamento da promoção</a>.</p>Veja também:<p><a href="calcule-o-cashback.html"><button type="button" class="btn btn-info">Calcular quanto vou receber de cashback pagando um boleto <i class="fas fa-money-bill-wave"></i></button></a></p></td></tr>
    </table>
