@@ -23,7 +23,7 @@ function calcular(){
    document.getElementById("mostrar_alerta").style.visibility="hidden";
    for (var i = 2; i < 13; i++) {
       valor_cashback=parseFloat(document.getElementById("valor").value);
-      var taxa_picpay=3.69/100;
+      var taxa_picpay=3.99/100;
       var taxa_pagto_boleto=3.09/100;
       var valor_boleto=(valor_cashback/(document.getElementById("percentual_"+i).value/100));
       var valor_financiado=valor_boleto*(1+taxa_pagto_boleto);
