@@ -32,7 +32,7 @@ function calcular(){
    perc_cashback=parseFloat(document.getElementById("perc_cashback").value/100);
    cashback_maximo=parseFloat(document.getElementById("cashback_maximo").value);
    taxa_picpay=3.99/100;
-   taxa_pagto_boleto=3.09/100;
+   taxa_pagto_boleto=3.99/100;
    tarifa_boleto=valor_boleto*taxa_pagto_boleto;
    valor_financiado=valor_boleto*(1+taxa_pagto_boleto);
    i=document.getElementById("qtd_parcelas").value;
@@ -157,7 +157,7 @@ td {text-align: center; font-size: 14px; }
             <div class="row row-cols-lg-auto g-3 align-items-center">
                <label for="taxa_cartao" class="form-label">Taxa de pagamento de boleto:</label>
                <input type="text" id="taxa_cartao" name="taxa_cartao" placeholder="Será calculado..." readonly>
-               <div id="taxa_cartaoHelp" class="form-text">Taxa de pagamento de boleto com cartão de crédito (3,09%).</div>
+               <div id="taxa_cartaoHelp" class="form-text">Taxa de pagamento de boleto com cartão de crédito (3,99%).</div>
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
                <label for="juros_parcelamento" class="form-label">Juros do parcelamento:</label>
