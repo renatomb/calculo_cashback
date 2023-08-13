@@ -151,16 +151,20 @@ td {text-align: center; font-size: 14px; }
                <div id="perc_cashbackHelp" class="form-text">O percentual do cashback varia conforme a quantidade de parcelas e a promoção recebida.</div>
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
-               <label for="pagto_cartao" class="form-label">Taxa pagamento com cartão:</label>
+               <label for="pagto_cartao" class="form-label">Taxa do cartão:</label>
+               <input class="amarelo" type="number" id="pagto_cartao" name="tx_cartao" size="5" value="3.99" min="0.01" max="100" step="0.01" class="amarelo" onclick="this.select();" onchange="calcular();">
+<!--
                <select class="amarelo" id="pagto_cartao" name="tx_cartao" onchange="calcular();">
                   <option value="3.99">3,99% Luz, saneamento, gas e impostos</option>
-                  <option value="4.99" selected>4,99% Demais boletos</option>
+                  <option value="4.99" selected>4,99% Demais boletos (Promocional)</option>
+                  <option value="5.99">5,99% Demais boletos (Padrão)</option>
                </select>
+-->
                <div id="pagto_parceladokHelp" class="form-text">Consulte sempre a p&aacute;gina de <a href="https://tarifas-taxas.picpay.com/">tarifas do PicPay para maiores informa&ccedil;&otilde;es.</a></div>
             </div>
             <div class="row row-cols-lg-auto g-3 align-items-center">
-               <label for="pagto_parcelado" class="form-label">Taxa pagamento parcelado:</label>
-               <input class="amarelo" type="number" id="pagto_parcelado" name="tx_parcelado" size="5" value="3.99" min="0.01" max="100" step="0.01" class="amarelo" onclick="this.select();" onchange="calcular();">
+               <label for="pagto_parcelado" class="form-label">Taxa do parcelamento:</label>
+               <input class="amarelo" type="number" id="pagto_parcelado" name="tx_parcelado" size="5" value="4.49" min="0.01" max="100" step="0.01" class="amarelo" onclick="this.select();" onchange="calcular();">
                <div id="pagto_parceladokHelp" class="form-text">Consulte sempre a p&aacute;gina de <a href="https://tarifas-taxas.picpay.com/">tarifas do PicPay para maiores informa&ccedil;&otilde;es.</a></div>
             </div>
 
@@ -213,5 +217,5 @@ td {text-align: center; font-size: 14px; }
 <p>O código fonte <i class="fas fa-code"></i> está disponível no <a href="https://github.com/renatomb/calculo_cashback" target="_blank">Repositório <i class="fab fa-git-square"></i> calculo_cashback <i class="fab fa-github"></i></a>.</p>
 </div>
 <div class="card"></div>
-<script data-ad-client="ca-pub-6914621756983807" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script></body>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6914621756983807" crossorigin="anonymous"></script>
 </html>
